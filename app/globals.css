@@ -1,0 +1,286 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  What: Global sanctuary surface — stone grain, liturgical type, no kit defaults.
+  Why: Template sites live on white cards and gold. This file is the chapel wall.
+  Related: tailwind.config.ts
+*/
+
+:root {
+  --verdigris: #4a7c6f;
+  --copper-raw: #b87333;
+  --volcanic-obsidian: #1a1614;
+  --cocoa-bean: #3d2817;
+  --limestone-ivory: #f3efe6;
+  --atlantic-deep: #0f3d3e;
+  --rainforest-canopy: #2d4a3e;
+  --terracotta-dust: #9c6b4f;
+  --parchment-warm: #e8e0d4;
+  --moss-stone: #6b7b6e;
+  --section-pad: 140px;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --section-pad: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --section-pad: 72px;
+  }
+}
+
+html {
+  background: var(--limestone-ivory);
+}
+
+html,
+body {
+  color: var(--volcanic-obsidian);
+  font-family: var(--font-source), sans-serif;
+  font-size: 16px;
+}
+
+@media (max-width: 1024px) {
+  html,
+  body {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  html,
+  body {
+    font-size: 14px;
+  }
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(74, 124, 111, 0.28);
+  color: var(--volcanic-obsidian);
+}
+
+:focus-visible {
+  outline: 3px solid var(--verdigris);
+  outline-offset: 3px;
+}
+
+/* Stone grain — used as a layer, not a flat black box. */
+.stone-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.22'/%3E%3C/svg%3E");
+}
+
+/* Legacy class kept for any leftover use */
+.stone-foundation {
+  background-color: var(--volcanic-obsidian);
+}
+
+.parchment-grain {
+  background-color: var(--parchment-warm);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+.engraved {
+  color: rgba(243, 239, 230, 0.8);
+  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.08), -1px -1px 0 rgba(0, 0, 0, 0.8);
+}
+
+.gothic-arch {
+  clip-path: polygon(0% 18%, 0% 100%, 100% 100%, 100% 18%, 50% 0%);
+}
+
+.gothic-rect {
+  clip-path: polygon(0% 0%, 0% 100%, 100% 100%, 100% 0%, 50% 0%);
+}
+
+/* --- Liturgy of Motion (plain CSS — styled-jsx was crashing Chrome's webpack runtime) --- */
+
+@keyframes shield-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes seal-orbit {
+  to {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+@keyframes wipe {
+  to {
+    -webkit-mask-size: 140% 100%;
+    mask-size: 140% 100%;
+  }
+}
+
+@keyframes drawline {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes draw-map {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes sonar {
+  0% {
+    r: 8;
+    opacity: 0.8;
+  }
+  100% {
+    r: 22;
+    opacity: 0;
+  }
+}
+
+@keyframes develop {
+  from {
+    opacity: 0;
+    filter: contrast(200%) grayscale(0.4) sepia(0.45);
+  }
+  to {
+    opacity: 0.55;
+    filter: contrast(100%) grayscale(0.2) sepia(0.35);
+  }
+}
+
+@keyframes mist {
+  to {
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+@keyframes step {
+  from {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+  }
+}
+
+@keyframes unfurl {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes fly {
+  to {
+    transform: translate(220px, -180px) rotate(25deg);
+    opacity: 0;
+  }
+}
+
+.hero-still {
+  animation: still-breath 22s ease-in-out infinite alternate;
+  transform-origin: center 62%;
+}
+
+@keyframes still-breath {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.06);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-still {
+    animation: none;
+  }
+}
+
+.hero-letter {
+  animation: letter-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes letter-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-mask {
+  -webkit-mask-image: linear-gradient(90deg, #000 70%, transparent);
+  mask-image: linear-gradient(90deg, #000 70%, transparent);
+  -webkit-mask-size: 0% 100%;
+  mask-size: 0% 100%;
+  -webkit-mask-repeat: no-repeat;
+  animation: wipe 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+}
+
+.map-stroke {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: draw-map 3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.pulse-mark circle:nth-child(2) {
+  animation: sonar 2s ease-out infinite;
+}
+
+.brightest circle:first-child {
+  filter: drop-shadow(0 0 10px #4a7c6f);
+}
+
+.develop-photo {
+  animation: develop 2.4s ease forwards;
+  filter: contrast(200%) grayscale(0.4) sepia(0.45);
+}
+
+.mist-in {
+  animation: mist 2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  filter: blur(8px);
+  opacity: 0;
+}
+
+.step-in {
+  animation: step 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unfurl {
+  transform-origin: center;
+  animation: unfurl 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,11 @@
+node_modules
+.next
+out
+.DS_Store
+.env
+.env.local
+*.log
+
+# Original client masters — too large for GitHub (hundreds of MB of .MOV)
+Client-data
+
